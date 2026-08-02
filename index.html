@@ -604,7 +604,9 @@
   <section class="py-20 lg:py-28" style="background: var(--bg-alt)">
     <div class="max-w-site mx-auto px-6 lg:px-10">
       <div class="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start reveal">
-        <div class="w-24 h-24 rounded-full flex items-center justify-center font-display text-2xl shrink-0" style="background:var(--surface); border:1px solid var(--border); color:var(--accent)">VA</div>
+        <div class="w-24 h-24 rounded-full overflow-hidden shrink-0" style="border:1.5px solid var(--border)">
+          <img src="vinicius-andrade.jpg" alt="Vinícius Andrade, psicólogo responsável pela curadoria Lumi Match" class="w-full h-full object-cover" width="96" height="96" loading="lazy">
+        </div>
         <div>
           <p class="eyebrow mb-2">Quem faz a curadoria</p>
           <h2 class="font-display text-2xl sm:text-3xl" style="color:var(--heading)">Vinícius Andrade</h2>
@@ -714,8 +716,9 @@
         <p class="text-xs font-bold uppercase tracking-wider mb-4" style="color:var(--text-secondary)">Contato</p>
         <ul class="space-y-2.5 text-sm" style="color:var(--text-primary)">
           <li>Rio de Janeiro, RJ</li>
-          <li><a href="#" class="hover:opacity-70 transition">WhatsApp</a></li>
-          <li><a href="#" class="hover:opacity-70 transition">Instagram</a></li>
+          <!-- Cole aqui o link do formulário de Trabalhe Conosco -->
+          <li><a href="COLE_AQUI_O_LINK_DE_TRABALHE_CONOSCO" class="hover:opacity-70 transition">Trabalhe Conosco</a></li>
+          <li><a href="https://www.instagram.com/lumi.aba?igsh=MTk2Zjhta3J3ZGcxOA==" target="_blank" rel="noopener" class="hover:opacity-70 transition">Instagram</a></li>
         </ul>
       </div>
     </div>
@@ -765,7 +768,11 @@
               <input id="f-email" name="email" type="email" required class="w-full rounded-xl px-4 py-3 text-sm" placeholder="voce@email.com">
             </div>
             <div>
-              <label for="f-idade" class="text-xs font-bold uppercase tracking-wider block mb-1.5" style="color:var(--text-secondary)">Idade da criança</label>
+              <label for="f-crianca" class="text-xs font-bold uppercase tracking-wider block mb-1.5" style="color:var(--text-secondary)">Nome da criança</label>
+              <input id="f-crianca" name="crianca" type="text" required class="w-full rounded-xl px-4 py-3 text-sm" placeholder="Nome ou apelido">
+            </div>
+            <div>
+              <label for="f-idade" class="text-xs font-bold uppercase tracking-wider block mb-1.5" style="color:var(--text-secondary)">Idade de <span class="child-name-slot">seu filho</span></label>
               <input id="f-idade" name="idade" type="number" min="0" max="18" required class="w-full rounded-xl px-4 py-3 text-sm" placeholder="Anos">
             </div>
           </div>
@@ -773,21 +780,21 @@
 
         <!-- ETAPA 2 · NECESSIDADES DA CRIANÇA -->
         <fieldset class="form-step hidden" data-step="2">
-          <legend class="font-display text-xl mb-1" style="color:var(--heading)">Fale sobre as necessidades do seu filho</legend>
-          <p class="text-sm mb-6" style="color:var(--text-secondary)">Isso nos ajuda a entender o perfil clínico antes de qualquer indicação.</p>
+          <legend class="font-display text-xl mb-1" style="color:var(--heading)">Fale sobre as necessidades de <span class="child-name-slot">seu filho</span></legend>
+          <p class="text-sm mb-6" style="color:var(--text-secondary)">Isso nos ajuda a entender o perfil clínico de <span class="child-name-slot">seu filho</span> antes de qualquer indicação.</p>
 
           <div class="space-y-6">
             <div data-group="diagnostico">
-              <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--text-secondary)">Diagnóstico</p>
+              <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--text-secondary)">Diagnóstico de <span class="child-name-slot">seu filho</span> <span class="normal-case font-normal">(pode marcar mais de um)</span></p>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="TEA" required><span class="chip-box flex items-center justify-between text-sm font-semibold">TEA<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="TDAH"><span class="chip-box flex items-center justify-between text-sm font-semibold">TDAH<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="TOD"><span class="chip-box flex items-center justify-between text-sm font-semibold">TOD<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="Deficiência Intelectual"><span class="chip-box flex items-center justify-between text-sm font-semibold">Def. Intelectual<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="Em investigação"><span class="chip-box flex items-center justify-between text-sm font-semibold">Em investigação<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
-                <label class="choice-chip"><input type="radio" name="diagnostico" value="Outro"><span class="chip-box flex items-center justify-between text-sm font-semibold">Outro<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="TEA" required><span class="chip-box flex items-center justify-between text-sm font-semibold">TEA<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="TDAH"><span class="chip-box flex items-center justify-between text-sm font-semibold">TDAH<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="TOD"><span class="chip-box flex items-center justify-between text-sm font-semibold">TOD<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="Deficiência Intelectual"><span class="chip-box flex items-center justify-between text-sm font-semibold">Def. Intelectual<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="Em investigação"><span class="chip-box flex items-center justify-between text-sm font-semibold">Em investigação<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
+                <label class="choice-chip"><input type="checkbox" name="diagnostico" value="Outro"><span class="chip-box flex items-center justify-between text-sm font-semibold">Outro<svg class="chip-check w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></label>
               </div>
-              <p class="field-error hidden text-xs mt-2.5" style="color:#D9534F">Selecione uma opção para continuar.</p>
+              <p class="field-error hidden text-xs mt-2.5" style="color:#D9534F">Selecione ao menos uma opção para continuar.</p>
             </div>
 
             <div>
@@ -852,7 +859,7 @@
 
             <div data-group="objetivo">
               <div class="flex items-center justify-between mb-3">
-                <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--text-secondary)">Qual é o principal objetivo da família?</p>
+                <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--text-secondary)">Qual é o principal objetivo para <span class="child-name-slot">seu filho</span>?</p>
                 <p id="objetivo-counter" class="text-xs shrink-0 pl-3" style="color:var(--text-secondary)">0 de 3</p>
               </div>
               <div class="grid grid-cols-2 gap-2.5">
@@ -1069,6 +1076,15 @@
   }
   objetivoInputs.forEach(i => i.addEventListener('change', () => { updateObjetivoLimits(); debouncedSave(); }));
 
+  // Personaliza os textos das etapas seguintes com o nome da criança
+  const childNameField = document.getElementById('f-crianca');
+  const childNameSlots = document.querySelectorAll('.child-name-slot');
+  function updateChildName(){
+    const name = (childNameField.value || '').trim();
+    childNameSlots.forEach(slot => { slot.textContent = name || 'seu filho'; });
+  }
+  childNameField.addEventListener('input', updateChildName);
+
   function showStep(n){
     steps.forEach((el, i) => el.classList.toggle('hidden', i !== n - 1));
     progressFill.style.width = `${(n / steps.length) * 100}%`;
@@ -1137,6 +1153,7 @@
     showStep(currentStep);
     form.reset();
     updateObjetivoLimits();
+    updateChildName();
   }
 
   function openModal(){
@@ -1173,6 +1190,7 @@
     errorNotice.classList.add('hidden');
 
     const raw = collectFormData();
+    if (Array.isArray(raw.diagnostico)) raw.diagnostico = raw.diagnostico.join(', ');
     if (Array.isArray(raw.objetivo)) raw.objetivo = raw.objetivo.join(', ');
 
     submitBtn.disabled = true;
@@ -1208,6 +1226,7 @@
   // Restaura o progresso salvo (se houver) e exibe a etapa correta,
   // mesmo antes do modal ser aberto.
   restoreProgress();
+  updateChildName();
   showStep(currentStep);
 </script>
 
