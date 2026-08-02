@@ -207,6 +207,20 @@
     .table-row-grid{ grid-template-columns: 1fr; }
   }
 </style>
+<!-- Meta Pixel: cole o seu Pixel ID nos dois pontos marcados abaixo -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2507936312963394');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"/></noscript>
 </head>
 
 <body class="font-body antialiased">
@@ -716,7 +730,8 @@
         <p class="text-xs font-bold uppercase tracking-wider mb-4" style="color:var(--text-secondary)">Contato</p>
         <ul class="space-y-2.5 text-sm" style="color:var(--text-primary)">
           <li>Rio de Janeiro, RJ</li>
-          <li><a href="https://forms.gle/cxhvEXDYPHgXcFL46" class="hover:opacity-70 transition">Trabalhe Conosco</a></li>
+          <!-- Cole aqui o link do formulário de Trabalhe Conosco -->
+          <li><a href="COLE_AQUI_O_LINK_DE_TRABALHE_CONOSCO" class="hover:opacity-70 transition">Trabalhe Conosco</a></li>
           <li><a href="https://www.instagram.com/lumi.aba?igsh=MTk2Zjhta3J3ZGcxOA==" target="_blank" rel="noopener" class="hover:opacity-70 transition">Instagram</a></li>
         </ul>
       </div>
@@ -747,6 +762,9 @@
       </div>
 
       <form id="curadoria-form" novalidate>
+        <input type="hidden" name="utm_source" id="utm_source">
+        <input type="hidden" name="utm_medium" id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
 
         <!-- ETAPA 1 · INFORMAÇÕES BÁSICAS -->
         <fieldset class="form-step" data-step="1">
@@ -760,7 +778,7 @@
             </div>
             <div>
               <label for="f-whats" class="text-xs font-bold uppercase tracking-wider block mb-1.5" style="color:var(--text-secondary)">Telefone / WhatsApp</label>
-              <input id="f-whats" name="whatsapp" type="tel" required pattern="\(?\d{2}\)?\s?9\d{4}-?\d{4}" title="(21) 90000-0000" class="w-full rounded-xl px-4 py-3 text-sm" placeholder="(21) 90000-0000">
+              <input id="f-whats" name="whatsapp" type="tel" required class="w-full rounded-xl px-4 py-3 text-sm" placeholder="(21) 90000-0000">
             </div>
             <div>
               <label for="f-email" class="text-xs font-bold uppercase tracking-wider block mb-1.5" style="color:var(--text-secondary)">E-mail</label>
@@ -994,7 +1012,7 @@
   let lastFocused = null;
 
   // Cole aqui a URL do seu Apps Script (Implantar > Nova implantação > App da Web)
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7B12RKb7r-ep2vq7_P31NK-mr-KgqyidNl6GlCP7sTpegGg5B8jN1pUiNp2izNNSU9g/exec';
+  const GOOGLE_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
   const STORAGE_KEY = 'lumiMatchFormProgress';
 
   const steps = Array.from(form.querySelectorAll('.form-step'));
@@ -1205,6 +1223,7 @@
         formState.classList.add('hidden');
         successState.classList.remove('hidden');
         safeStorage('remove', STORAGE_KEY);
+        if (typeof fbq === 'function') fbq('track', 'Lead');
       })
       .catch(() => {
         errorNotice.classList.remove('hidden');
@@ -1227,6 +1246,14 @@
   restoreProgress();
   updateChildName();
   showStep(currentStep);
+
+  // Preenche os campos ocultos de origem (UTM) a partir da URL do anúncio
+  const urlParams = new URLSearchParams(window.location.search);
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach(key => {
+    const field = document.getElementById(key);
+    const value = urlParams.get(key);
+    if (field && value) field.value = value;
+  });
 </script>
 
 </body>
