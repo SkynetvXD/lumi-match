@@ -207,7 +207,7 @@
     .table-row-grid{ grid-template-columns: 1fr; }
   }
 </style>
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel: cole o seu Pixel ID nos dois pontos marcados abaixo -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -220,10 +220,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '2507936312963394');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"/></noscript>
 </head>
 
 <body class="font-body antialiased">
@@ -768,6 +765,10 @@ src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
         <input type="hidden" name="utm_source" id="utm_source">
         <input type="hidden" name="utm_medium" id="utm_medium">
         <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="page_url" id="page_url">
+        <input type="hidden" name="user_agent" id="user_agent">
+        <input type="hidden" name="fbp" id="fbp">
+        <input type="hidden" name="fbc" id="fbc">
 
         <!-- ETAPA 1 · INFORMAÇÕES BÁSICAS -->
         <fieldset class="form-step" data-step="1">
@@ -1015,7 +1016,7 @@ src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
   let lastFocused = null;
 
   // Cole aqui a URL do seu Apps Script (Implantar > Nova implantação > App da Web)
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsqwyb2BtZBFzAyc17DwVjkJweX63DmsKNp40kynpAD9RON-lekOD1JakBzLtx7lzenw/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2LXQym1liHBypAS-ZeyrE59Blzma9uJEb0b4Fy_7NyZfdm74LgDpi9ywZbautfaVIGw/exec';
   const STORAGE_KEY = 'lumiMatchFormProgress';
 
   const steps = Array.from(form.querySelectorAll('.form-step'));
@@ -1213,6 +1214,11 @@ src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
     if (Array.isArray(raw.diagnostico)) raw.diagnostico = raw.diagnostico.join(', ');
     if (Array.isArray(raw.objetivo)) raw.objetivo = raw.objetivo.join(', ');
 
+    // ID único do evento: enviado tanto pro Pixel do navegador quanto pro
+    // Apps Script, para o Meta reconhecer que é o mesmo lead e não duplicar.
+    const leadEventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+    raw.lead_event_id = leadEventId;
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Enviando...';
 
@@ -1226,7 +1232,7 @@ src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
         formState.classList.add('hidden');
         successState.classList.remove('hidden');
         safeStorage('remove', STORAGE_KEY);
-        if (typeof fbq === 'function') fbq('track', 'Lead');
+        if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: leadEventId });
       })
       .catch(() => {
         errorNotice.classList.remove('hidden');
@@ -1257,6 +1263,19 @@ src="https://www.facebook.com/tr?id=2507936312963394&ev=PageView&noscript=1"
     const value = urlParams.get(key);
     if (field && value) field.value = value;
   });
+
+  // Campos usados pela API de Conversões (para casar o evento do navegador com o do servidor)
+  document.getElementById('page_url').value = window.location.href;
+  document.getElementById('user_agent').value = navigator.userAgent;
+  const fbpMatch = document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/);
+  if (fbpMatch) document.getElementById('fbp').value = fbpMatch[1];
+  const fbcMatch = document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/);
+  if (fbcMatch) {
+    document.getElementById('fbc').value = fbcMatch[1];
+  } else {
+    const fbclid = urlParams.get('fbclid');
+    if (fbclid) document.getElementById('fbc').value = `fb.1.${Date.now()}.${fbclid}`;
+  }
 </script>
 
 </body>
